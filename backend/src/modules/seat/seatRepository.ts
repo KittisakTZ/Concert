@@ -23,23 +23,51 @@ export const seatRepository = {
         price: true,
         capacity: true,
         status: true,
+        concert: {
+          select: {
+            concert_Id: true,
+            concert_name: true,
+          },
+        },
       },
     });
   },
 
-  findByIdAsync: async <Key extends keyof seat>(
-    seat_Id: string,
-    keys = SeatKeys as Key[]
-  ) => {
+  findByIdAsync: async (seat_Id: string) => {
     return prisma.seat.findUnique({
       where: { seat_Id },
-      select: keys.reduce((obj, key) => ({ ...obj, [key]: true }), {}),
-    }) as Promise<Pick<seat, Key> | null>;
+      select: {
+        seat_Id: true,
+        seat_number: true,
+        zone_name: true,
+        price: true,
+        capacity: true,
+        status: true,
+        concert: {
+          select: {
+            concert_Id: true,
+            concert_name: true,
+            date_time: true,
+          },
+        },
+      },
+    });
   },
 
   createAsync: async (payload: TypePayloadSeat) => {
     return prisma.seat.create({
-      data: payload,
+      data: {
+        seat_number: payload.seat_number,
+        zone_name: payload.zone_name,
+        price: payload.price,
+        capacity: payload.capacity,
+        status: payload.status,
+        concert: { // สร้างความสัมพันธ์กับ concert
+          connect: {
+            concert_Id: payload.concert_id,
+          },
+        },
+      },
     });
   },
 

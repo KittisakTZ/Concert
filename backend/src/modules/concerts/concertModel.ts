@@ -6,6 +6,8 @@ export type TypePayloadConcert = {
   description: string;
   rounds: number;
   status: string;
+  venue_id: string;   // เพิ่ม venue_id
+  artist_id: string;  // เพิ่ม artist_id
 };
 
 export const CreateConcertSchema = z.object({
@@ -15,6 +17,8 @@ export const CreateConcertSchema = z.object({
     description: z.string().max(500),
     rounds: z.number().min(1),
     status: z.enum(["1", "2", "3"]), // 1: Coming soon, 2: Finish, 3: Cancelled
+    venue_id: z.string().uuid(),   // เพิ่ม venue_id
+    artist_id: z.string().uuid(),  // เพิ่ม artist_id
   }),
 });
 
@@ -26,6 +30,8 @@ export const UpdateConcertSchema = z.object({
     description: z.string().max(500),
     rounds: z.number().min(1),
     status: z.enum(["1", "2", "3"]),
+    venue_id: z.string().uuid(),   // เพิ่ม venue_id
+    artist_id: z.string().uuid(),  // เพิ่ม artist_id
   }),
 });
 

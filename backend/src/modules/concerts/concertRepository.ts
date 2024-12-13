@@ -24,6 +24,8 @@ export const concertRepository = {
         description: true,
         rounds: true,
         status: true,
+        venue_id: true,
+        artist_id: true,
       },
     });
   },
@@ -34,20 +36,48 @@ export const concertRepository = {
   ) => {
     return prisma.concerts.findUnique({
       where: { concert_Id },
-      select: keys.reduce((obj, key) => ({ ...obj, [key]: true }), {}),
+      select: {
+        ...keys.reduce((obj, key) => ({ ...obj, [key]: true }), {}),
+        venue_id: true,   // แสดง venue_id
+        artist_id: true,  // แสดง artist_id
+      },
     }) as Promise<Pick<concerts, Key> | null>;
   },
 
   createAsync: async (payload: TypePayloadConcert) => {
     return prisma.concerts.create({
-      data: payload,
+      data: {
+        concert_name: payload.concert_name,
+        date_time: payload.date_time,
+        description: payload.description,
+        rounds: payload.rounds,
+        status: payload.status,
+        venue: {
+          connect: { venue_Id: payload.venue_id },  // เชื่อมโยงกับ venue
+        },
+        artist: {
+          connect: { artist_Id: payload.artist_id }, // เชื่อมโยงกับ artist
+        },
+      },
     });
   },
 
   updateAsync: async (concert_Id: string, payload: TypePayloadConcert) => {
     return prisma.concerts.update({
       where: { concert_Id },
-      data: payload,
+      data: {
+        concert_name: payload.concert_name,
+        date_time: payload.date_time,
+        description: payload.description,
+        rounds: payload.rounds,
+        status: payload.status,
+        venue: {
+          connect: { venue_Id: payload.venue_id },  // เชื่อมโยงกับ venue
+        },
+        artist: {
+          connect: { artist_Id: payload.artist_id }, // เชื่อมโยงกับ artist
+        },
+      },
     });
   },
 

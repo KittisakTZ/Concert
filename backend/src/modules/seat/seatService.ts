@@ -8,7 +8,7 @@ export const seatService = {
     const seats = await seatRepository.findAllAsync();
     return new ServiceResponse(
       ResponseStatus.Success,
-      "Get all seats success",
+      "Get all seats with related concerts success",
       seats,
       StatusCodes.OK
     );
@@ -26,7 +26,7 @@ export const seatService = {
     }
     return new ServiceResponse(
       ResponseStatus.Success,
-      "Get seat success",
+      "Get seat with related concert success",
       seat,
       StatusCodes.OK
     );

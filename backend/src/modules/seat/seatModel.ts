@@ -7,6 +7,7 @@ export type TypePayloadSeat = {
   price: number;
   capacity: number;
   status: string; // 1: Available, 2: Booked
+  concert_id: string;
 };
 
 // Schema for creating a seat
