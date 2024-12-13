@@ -22,14 +22,17 @@ CREATE TABLE "product" (
 
 -- CreateTable
 CREATE TABLE "users" (
-    "id" UUID NOT NULL,
-    "username" TEXT NOT NULL,
+    "user_Id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "user_fname" TEXT NOT NULL,
+    "user_lname" TEXT NOT NULL,
+    "phone" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "role" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP(3),
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "users_pkey" PRIMARY KEY ("user_Id")
 );
 
 -- CreateTable
@@ -118,7 +121,7 @@ CREATE TABLE "seat" (
 CREATE UNIQUE INDEX "categories_category_name_key" ON "categories"("category_name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "users_username_key" ON "users"("username");
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- AddForeignKey
 ALTER TABLE "product" ADD CONSTRAINT "product_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

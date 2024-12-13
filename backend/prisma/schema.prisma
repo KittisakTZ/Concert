@@ -28,6 +28,18 @@ model product {
   category      categories @relation(fields: [category_id], references: [id])
 }
 
+model users {
+  user_Id        String   @id @default(uuid())
+  title     String   // e.g., 1: Mr., 2: Ms., 3: Mrs.
+  fname     String   @map("user_fname")
+  lname     String   @map("user_lname")
+  phone     String
+  email     String   @unique
+  password  String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
 model venues {
   venue_Id         String   @id @default(uuid())
   venue_name String

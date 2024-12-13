@@ -13,6 +13,7 @@ import { artistRouter } from "@modules/artists/artistsRouter";
 import { paymentRouter } from "@modules/payment/paymentRouter";
 import { bookingsRouter } from "@modules/bookings/bookingsRouter";
 import { seatRouter } from "@modules/seat/seatRouter";
+import { userRouter } from "@modules/users/usersRouter";
 
 const logger = pino({ name: "server start" });
 const app = express();
@@ -33,6 +34,7 @@ app.use("/v1/artist",artistRouter);
 app.use("/v1/payment",paymentRouter);
 app.use("/v1/booking",bookingsRouter);
 app.use("/v1/seat",seatRouter);
+app.use("/v1/user",userRouter);
 
 // Error handlers
 app.use(errorHandler());
