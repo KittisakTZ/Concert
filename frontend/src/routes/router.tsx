@@ -3,6 +3,7 @@ import MainLayout from "@/components/layouts/layout.main";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error404 from "@/components/layouts/layout.error404";
 import CategoriesPage from "@/pages/category";
+import ArtistsFeature from "@/features/artist";
 
 const router = createBrowserRouter([
     {
@@ -16,7 +17,11 @@ const router = createBrowserRouter([
           {
             path: "/categories",
             element: <CategoriesPage />
-          }
+          },
+          {
+            path: "/artists",
+            element: <ArtistsFeature />
+          },
         ],
     },
     {
