@@ -21,15 +21,20 @@ export default function ConcertsFeature() {
     }, []);
 
     return (
-        <div className="container w-full pt-2">
-            <Card variant="surface" className="w-600 m-auto">
-                <Flex className="w-full" direction="row" gap="2">
-                    <Text as="div" size="2" weight="bold">Concerts</Text>
+        <div className="flex flex-col min-h-screen bg-gray-100 p-4">
+            <Card 
+                variant="surface" 
+                className="max-w-screen-xl w-full mx-auto bg-white shadow-md rounded-lg p-6"
+            >
+                <Flex direction="row" justify="between" align="center" className="mb-4">
+                <Text as="div" size="6" weight="bold" className="text-blue-600 text-3xl">
+                    Concerts Management
+                </Text>
                     <DialogAddConcert getConcertsData={getConcertsData} />
                 </Flex>
 
-                <Table.Root>
-                    <Table.Header>
+                <Table.Root className="w-full border border-gray-200 rounded-md">
+                    <Table.Header className="bg-gray-200">
                         <Table.Row>
                             <Table.ColumnHeaderCell>Id</Table.ColumnHeaderCell>
                             <Table.ColumnHeaderCell>Concert Name</Table.ColumnHeaderCell>
@@ -44,7 +49,7 @@ export default function ConcertsFeature() {
 
                     <Table.Body>
                         {concerts && concerts.map((concert: TypeConcertAll) => (
-                            <Table.Row key={concert.concert_Id}>
+                            <Table.Row key={concert.concert_Id} className="hover:bg-gray-100">
                                 <Table.RowHeaderCell>{concert.concert_Id}</Table.RowHeaderCell>
                                 <Table.Cell>{concert.concert_name}</Table.Cell>
                                 <Table.Cell>{new Date(concert.date_time).toLocaleString()}</Table.Cell>
