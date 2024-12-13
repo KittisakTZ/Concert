@@ -28,15 +28,6 @@ model product {
   category      categories @relation(fields: [category_id], references: [id])
 }
 
-model users {
-  id             String   @id @default(uuid()) @db.Uuid
-  username  String   @unique
-  password  String
-  role      String // USER , ADMIN
-  created_at     DateTime @default(now())
-  updated_at     DateTime? @updatedAt 
-}
-
 model venues {
   venue_Id         String   @id @default(uuid())
   venue_name String

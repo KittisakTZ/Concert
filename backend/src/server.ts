@@ -7,7 +7,6 @@ import cookieParser from 'cookie-parser';
 import { env } from "@common/utils/envConfig";
 import errorHandler from "@common/middleware/errorHandler";
 import { categoryRouter } from "@modules/categories/categoryRouter";
-import { userRouter } from "@modules/users/userRouter";
 import { venueRouter } from "@modules/venue/venueRouter";
 import { concertRouter } from "@modules/concerts/concertRouter";
 import { artistRouter } from "@modules/artists/artistsRouter";
@@ -28,7 +27,6 @@ app.use(helmet());
 
 // Routes
 app.use("/v1/category", categoryRouter);
-app.use("/v1/user", userRouter);
 app.use("/v1/venue",venueRouter);
 app.use("/v1/concerts",concertRouter);
 app.use("/v1/artist",artistRouter);

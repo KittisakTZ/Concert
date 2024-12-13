@@ -3,7 +3,6 @@ import MainLayout from "@/components/layouts/layout.main";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error404 from "@/components/layouts/layout.error404";
 import CategoriesPage from "@/pages/category";
-import LoginPage from "@/pages/login";
 
 const router = createBrowserRouter([
     {
@@ -19,10 +18,6 @@ const router = createBrowserRouter([
             element: <CategoriesPage />
           }
         ],
-    },
-    {
-      path: "/login",
-      element: <LoginPage />,
     },
     {
         path: "*",
