@@ -4,9 +4,7 @@ import { bookingsService } from "./bookingsService";
 import { CreateBookingsSchema, UpdateBookingsSchema, GetBookingsSchema } from "./bookingsModel";
 import { validateRequest, handleServiceResponse } from "@common/utils/httpHandlers";
 
-const prisma = new PrismaClient({
-  log: ['query', 'info', 'warn', 'error'],
-});
+const prisma = new PrismaClient({});
 
 export const bookingsRouter = Router();
 

@@ -6,9 +6,7 @@ import { validateRequest, handleServiceResponse } from "@common/utils/httpHandle
 
 export const seatRouter = Router();
 
-const prisma = new PrismaClient({
-  log: ['query', 'info', 'warn', 'error'],
-});
+const prisma = new PrismaClient({});
 
 seatRouter.get("/get", async (req, res) => {
   const response = await seatService.findAll();
