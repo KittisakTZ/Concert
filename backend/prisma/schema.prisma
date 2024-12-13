@@ -36,3 +36,67 @@ model users {
   created_at     DateTime @default(now())
   updated_at     DateTime? @updatedAt 
 }
+
+model venues {
+  venue_Id         String   @id @default(uuid())
+  venue_name String
+  capacity   Int
+  address    String
+  district   String
+  province   String
+  postal_code String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model concerts {
+  concert_Id          String   @id @default(uuid())
+  concert_name String
+  date_time    DateTime
+  description  String
+  rounds       Int
+  status       String   // 1: Coming soon, 2: Finish, 3: Cancelled
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+}
+
+model artists {
+  artist_Id          String   @id @default(uuid())
+  artist_name String
+  description String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+model payment {
+  payment_Id             String   @id @default(uuid())
+  payment_date    DateTime
+  amount          Float
+  payment_method  String   // 1: Credit card, 2: Transfer
+  status          String   // 1: Succeed, 2: Failed
+  transaction_ref String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+}
+
+model bookings {
+  bookings_Id           String   @id @default(uuid())
+  bookings_date DateTime
+  amount       Int
+  unit_price   Float
+  total_amount Float
+  status       String   // 1: Waiting, 2: Paid, 3: Cancelled
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+}
+
+model seat {
+  seat_Id          String   @id @default(uuid())
+  seat_number String
+  zone_name   String
+  price       Float
+  capacity    Int
+  status      String   // 1: Available, 2: Booked
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
