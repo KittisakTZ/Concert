@@ -5,7 +5,7 @@ import Error404 from "@/components/layouts/layout.error404";
 import CategoriesPage from "@/pages/category";
 import ArtistsFeature from "@/features/artist";
 import ConcertsFeature from "@/features/concerts";
-
+import UsersFeature from "@/features/user"
 const router = createBrowserRouter([
     {
         path: "/",
@@ -26,6 +26,10 @@ const router = createBrowserRouter([
           {
             path: "/concerts",
             element: <ConcertsFeature />
+          },
+          {
+            path: "/user",
+            element: <UsersFeature />
           },
         ],
     },
