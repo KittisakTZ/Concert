@@ -22,3 +22,10 @@ export const GET_USER_ALL = "/v1/user/get";
 export const CREATE_USER = "/v1/user/create";
 export const UPDATE_USER = "/v1/user/update";
 export const DELETE_USER = "/v1/user/delete";
+
+// VENUES
+export const GET_VENUE_ALL = "/v1/venue/get";
+export const CREATE_VENUE = "/v1/venue/create";
+export const UPDATE_VENUE = "/v1/venue/update";
+export const DELETE_VENUE = "/v1/venue/delete";
+
