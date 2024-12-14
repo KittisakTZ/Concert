@@ -15,4 +15,4 @@ export const GET_CONCERT_ALL = "/v1/concerts/get";
 export const CREATE_CONCERT = "/v1/concerts/create";
 export const UPDATE_CONCERT = "/v1/concerts/update";
 export const DELETE_CONCERT = "/v1/concerts/delete";
-export const GET_DETAILS_SQL ="/v1/concerts/get-details-sql";
+export const GET_DETAILS_SQL = "/v1/concerts/get-details-sql/:concert_Id";

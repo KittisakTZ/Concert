@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { Table, Card, Flex, Text } from "@radix-ui/themes";
+import { Table, Card, Flex, Text, Button } from "@radix-ui/themes";
 import { getConcert } from "@/services/concert.service";
 import { TypeConcertAll } from "@/types/response/response.concert";
 import DialogAddConcert from "./components/dialogAddConcert";
 import DialogEditConcert from "./components/dialogEditConcert";
 import AlertDialogDeleteConcert from "./components/alertDialogDeleteConcertt";
+import DetailConcertDialog from "./components/DetailConcertDialog";
 
 export default function ConcertsFeature() {
     const [concerts, setConcerts] = useState<TypeConcertAll[]>([]);
+    const [selectedConcertId, setSelectedConcertId] = useState<string | null>(null);
 
     const getConcertsData = () => {
         getConcert().then((res) => {
@@ -57,6 +59,14 @@ export default function ConcertsFeature() {
                                 <Table.Cell>{concert.rounds}</Table.Cell>
                                 <Table.Cell>{concert.status}</Table.Cell>
                                 <Table.Cell>
+                                    <Button 
+                                        variant="outline"
+                                        onClick={() => setSelectedConcertId(concert.concert_Id)}
+                                    >
+                                        View Details
+                                    </Button>
+                                </Table.Cell>
+                                <Table.Cell>
                                     <DialogEditConcert 
                                         getConcertsData={getConcertsData}
                                         concert_Id={concert.concert_Id}
@@ -80,6 +90,12 @@ export default function ConcertsFeature() {
                         ))}
                     </Table.Body>
                 </Table.Root>
+                {selectedConcertId && (
+                    <DetailConcertDialog
+                        concert_Id={selectedConcertId}
+                        onClose={() => setSelectedConcertId(null)} // ปิด dialog
+                    />
+                )}
             </Card>
         </div>
     );
