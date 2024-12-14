@@ -15,7 +15,8 @@ export const GET_CONCERT_ALL = "/v1/concerts/get";
 export const CREATE_CONCERT = "/v1/concerts/create";
 export const UPDATE_CONCERT = "/v1/concerts/update";
 export const DELETE_CONCERT = "/v1/concerts/delete";
-export const GET_DETAILS_SQL ="/v1/concerts/get-details-sql";
+
+
 
 // USERS
 export const GET_USER_ALL = "/v1/user/get";
@@ -28,4 +29,7 @@ export const GET_VENUE_ALL = "/v1/venue/get";
 export const CREATE_VENUE = "/v1/venue/create";
 export const UPDATE_VENUE = "/v1/venue/update";
 export const DELETE_VENUE = "/v1/venue/delete";
+
+
+export const GET_DETAILS_SQL = "/v1/concerts/get-details-sql/:concert_Id";
 

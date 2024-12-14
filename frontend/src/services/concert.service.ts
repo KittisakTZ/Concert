@@ -1,7 +1,7 @@
 import { GET_CONCERT_ALL, CREATE_CONCERT, UPDATE_CONCERT, DELETE_CONCERT, GET_DETAILS_SQL} from "@/apis/endpoint.api";
 import mainApi from "@/apis/main.api";
 import { PayLoadCreateConcert, PayloadUpdateConcert, PayLoadDeleteConcert } from "@/types/requests/request.concert";
-import { ConcertResponse } from "@/types/response/response.concert";
+import { ConcertResponse, TypeConcertDetails } from "@/types/response/response.concert";
 
 export const getConcert = async () => {
     const { data: response } = await mainApi.get(
@@ -32,9 +32,9 @@ export const deleteConcert = async (data: PayLoadDeleteConcert) => {
     return response;
 }
 
-export const getConcertSql = async () => {
-    const { data: response } = await mainApi.get(
-        GET_DETAILS_SQL
+export const getConcertDetailsSql = async (concert_Id: string): Promise<TypeConcertDetails> => {
+    const { data: response } = await mainApi.get<ConcertResponse>(
+        `${GET_DETAILS_SQL}/${concert_Id}` // เติม concert_Id จริงเข้าไปใน URL
     );
-    return response;
+    return response.responseObject as unknown as TypeConcertDetails;
 };
