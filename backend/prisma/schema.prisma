@@ -16,23 +16,117 @@ model categories {
   products       product[]
 }
 
-
 // Product Model
 model product {
   id            String   @id @default(uuid()) @db.Uuid
   product_name  String
   price         Float
-  category_id   String  @db.Uuid
+  category_id   String   @db.Uuid
   created_at    DateTime @default(now())
   updated_at    DateTime? @updatedAt
   category      categories @relation(fields: [category_id], references: [id])
 }
 
+// User Model
 model users {
-  id             String   @id @default(uuid()) @db.Uuid
-  username  String   @unique
-  password  String
-  role      String // USER , ADMIN
+  user_Id        String   @id @default(uuid()) @db.Uuid
+  title          String   // e.g., 1: Mr., 2: Ms., 3: Mrs.
+  fname          String   
+  lname          String   
+  phone          String
+  email          String   @unique
+  password       String
   created_at     DateTime @default(now())
-  updated_at     DateTime? @updatedAt 
+  updated_at     DateTime @updatedAt
+  bookings       bookings[]
+}
+
+// Venue Model
+model venues {
+  venue_Id       String   @id @default(uuid()) @db.Uuid
+  venue_name     String
+  capacity       Int
+  address        String
+  district       String
+  province       String
+  postal_code    String
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  concerts       concerts[]
+}
+
+// Concert Model
+model concerts {
+  concert_Id     String   @id @default(uuid()) @db.Uuid
+  concert_name   String
+  date_time      DateTime
+  description    String
+  rounds         Int
+  status         String   // 1: Coming soon, 2: Finish, 3: Cancelled
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  venue_id       String   @db.Uuid
+  venue          venues   @relation(fields: [venue_id], references: [venue_Id]) // FK to venues
+  seats          seat[]   // One-to-Many with seats
+  bookings       bookings[] // One-to-Many with bookings
+  artist_id      String   @db.Uuid
+  artist         artists  @relation(fields: [artist_id], references: [artist_Id]) // FK to artists
+}
+
+// Artist Model
+model artists {
+  artist_Id      String   @id @default(uuid()) @db.Uuid
+  artist_name    String
+  description    String
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  concerts       concerts[] // One-to-Many with concerts
+}
+
+// Payment Model
+model payment {
+  payment_Id       String   @id @default(uuid()) @db.Uuid
+  payment_date     DateTime
+  amount           Float
+  payment_method   String   // 1: Credit card, 2: Transfer
+  status           String   // 1: Succeed, 2: Failed
+  transaction_ref  String
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+  bookings         bookings[]
+}
+
+// Bookings Model
+model bookings {
+  bookings_Id      String   @id @default(uuid()) @db.Uuid
+  bookings_date    DateTime
+  amount           Int
+  unit_price       Float
+  total_amount     Float
+  status           String   // 1: Waiting, 2: Paid, 3: Cancelled
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+  user_id          String   @db.Uuid
+  user             users    @relation(fields: [user_id], references: [user_Id]) // FK to users
+  payment_id       String   @db.Uuid
+  payment          payment  @relation(fields: [payment_id], references: [payment_Id]) // FK to payment
+  seat_id          String   @db.Uuid
+  seat             seat     @relation(fields: [seat_id], references: [seat_Id]) // FK to seat
+  concert_id       String   @db.Uuid
+  concert          concerts @relation(fields: [concert_id], references: [concert_Id]) // FK to concerts
+}
+
+// Seat Model
+model seat {
+  seat_Id          String   @id @default(uuid()) @db.Uuid
+  seat_number      String
+  zone_name        String
+  price            Float
+  capacity         Int
+  status           String   // 1: Available, 2: Booked
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+  concert_id       String   @db.Uuid
+  concert          concerts @relation(fields: [concert_id], references: [concert_Id]) // FK to concerts
+  bookings         bookings[] // One-to-Many with bookings
 }
